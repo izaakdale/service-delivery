@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package delivery;
+option go_package = "./model/delivery";
+
+message Address {
+    string house_name_or_number = 2;
+    string town = 3;
+    string postcode = 4;
+}
