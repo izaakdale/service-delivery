@@ -32,6 +32,8 @@ github.com/google/go-cmp v0.5.5/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/
 github.com/google/go-cmp v0.5.6 h1:BKbKCqvP6I+rmFHt06ZmyQtvB8xAkWdhFyr0ZUNZcxQ=
 github.com/izaakdale/utils-go v1.0.5 h1:IbOrJKSnv6lTl+hRrN7Wa/Qtn+OfGG/LVQix3a82AAI=
 github.com/izaakdale/utils-go v1.0.5/go.mod h1:nrzTq2C5z6w0HZhHRNiudPuHjiXdobFzq5PKp9+nVOM=
+github.com/izaakdale/utils-go v1.0.6-0.20221007142805-0835b1281424 h1:XvALJw07X+JbpqBYnBM07z3fdfKF6FRdP5vEEs4PnP4=
+github.com/izaakdale/utils-go v1.0.6-0.20221007142805-0835b1281424/go.mod h1:nrzTq2C5z6w0HZhHRNiudPuHjiXdobFzq5PKp9+nVOM=
 github.com/jmespath/go-jmespath v0.4.0 h1:BEgLn5cpjn8UN1mAw4NjwDrS35OdebyEtFe+9YPoQUg=
 github.com/jmespath/go-jmespath v0.4.0/go.mod h1:T8mJZnbsbmF+m6zOOFylbeCJqk5+pHWvzYPziyZiYoo=
 github.com/jmespath/go-jmespath/internal/testify v1.5.1 h1:shLQSRRSCCPj3f2gpwzGwWFoC7ycTf1rcQZHOlsJ6N8=

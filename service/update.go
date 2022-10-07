@@ -31,7 +31,10 @@ func UpdateDeliveryStatusHandler(w http.ResponseWriter, r *http.Request) {
 		Address:    req.Address,
 	})
 
-	response.WriteJson(w, http.StatusAccepted, "Updated!")
+	response.WriteJson(w, http.StatusAccepted, response.Response{
+		Code:    http.StatusAccepted,
+		Message: "Updated!",
+	})
 }
 
 func sanitizeStatus(status string) (string, error) {
