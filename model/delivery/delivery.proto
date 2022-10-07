@@ -14,9 +14,17 @@ message DeliveryRequest {
     Address address = 2;
 }
 
+message DeliveryResponse {
+    ORDER_STATUS status = 2;
+}
+
 message Address {
     string house_name_or_number = 1;
     string street = 2;
     string town = 3;
     string postcode = 4;
+}
+
+service DeliveryService {
+    rpc Deivery (DeliveryRequest) returns (DeliveryResponse);
 }
