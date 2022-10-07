@@ -26,5 +26,5 @@ message Address {
 }
 
 service DeliveryService {
-    rpc Deivery (DeliveryRequest) returns (DeliveryResponse);
+    rpc Delivery (DeliveryRequest) returns (DeliveryResponse);
 }

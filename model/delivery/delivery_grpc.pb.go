@@ -22,7 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type DeliveryServiceClient interface {
-	Deivery(ctx context.Context, in *DeliveryRequest, opts ...grpc.CallOption) (*DeliveryResponse, error)
+	Delivery(ctx context.Context, in *DeliveryRequest, opts ...grpc.CallOption) (*DeliveryResponse, error)
 }
 
 type deliveryServiceClient struct {
@@ -33,9 +33,9 @@ func NewDeliveryServiceClient(cc grpc.ClientConnInterface) DeliveryServiceClient
 	return &deliveryServiceClient{cc}
 }
 
-func (c *deliveryServiceClient) Deivery(ctx context.Context, in *DeliveryRequest, opts ...grpc.CallOption) (*DeliveryResponse, error) {
+func (c *deliveryServiceClient) Delivery(ctx context.Context, in *DeliveryRequest, opts ...grpc.CallOption) (*DeliveryResponse, error) {
 	out := new(DeliveryResponse)
-	err := c.cc.Invoke(ctx, "/delivery.DeliveryService/Deivery", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/delivery.DeliveryService/Delivery", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ func (c *deliveryServiceClient) Deivery(ctx context.Context, in *DeliveryRequest
 // All implementations must embed UnimplementedDeliveryServiceServer
 // for forward compatibility
 type DeliveryServiceServer interface {
-	Deivery(context.Context, *DeliveryRequest) (*DeliveryResponse, error)
+	Delivery(context.Context, *DeliveryRequest) (*DeliveryResponse, error)
 	mustEmbedUnimplementedDeliveryServiceServer()
 }
 
@@ -54,8 +54,8 @@ type DeliveryServiceServer interface {
 type UnimplementedDeliveryServiceServer struct {
 }
 
-func (UnimplementedDeliveryServiceServer) Deivery(context.Context, *DeliveryRequest) (*DeliveryResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Deivery not implemented")
+func (UnimplementedDeliveryServiceServer) Delivery(context.Context, *DeliveryRequest) (*DeliveryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delivery not implemented")
 }
 func (UnimplementedDeliveryServiceServer) mustEmbedUnimplementedDeliveryServiceServer() {}
 
@@ -70,20 +70,20 @@ func RegisterDeliveryServiceServer(s grpc.ServiceRegistrar, srv DeliveryServiceS
 	s.RegisterService(&DeliveryService_ServiceDesc, srv)
 }
 
-func _DeliveryService_Deivery_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _DeliveryService_Delivery_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeliveryRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DeliveryServiceServer).Deivery(ctx, in)
+		return srv.(DeliveryServiceServer).Delivery(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/delivery.DeliveryService/Deivery",
+		FullMethod: "/delivery.DeliveryService/Delivery",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DeliveryServiceServer).Deivery(ctx, req.(*DeliveryRequest))
+		return srv.(DeliveryServiceServer).Delivery(ctx, req.(*DeliveryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -96,8 +96,8 @@ var DeliveryService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*DeliveryServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Deivery",
-			Handler:    _DeliveryService_Deivery_Handler,
+			MethodName: "Delivery",
+			Handler:    _DeliveryService_Delivery_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
