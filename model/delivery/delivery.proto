@@ -7,6 +7,7 @@ enum ORDER_STATUS{
     PROCESSING = 0;
     OUT_FOR_DELIVERY = 1;
     DELIVERED = 2;
+    MISSING = 3;
 }
 
 message DeliveryRequest {
