@@ -15,7 +15,13 @@ message DeliveryRequest {
 }
 
 message DeliveryResponse {
-    ORDER_STATUS status = 2;
+    string status = 2;
+}
+
+message UpdateDeliveryStatusRequest {
+    string order_id = 1;
+    string status = 2;
+    Address address = 3;
 }
 
 message Address {

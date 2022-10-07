@@ -5,6 +5,7 @@ go 1.19
 require (
 	github.com/aws/aws-sdk-go v1.44.113
 	github.com/izaakdale/utils-go v1.0.5
+	github.com/julienschmidt/httprouter v1.3.0
 	google.golang.org/grpc v1.50.0
 	google.golang.org/protobuf v1.28.1
 )

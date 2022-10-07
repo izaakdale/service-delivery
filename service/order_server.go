@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"net"
-	"sync"
 
 	"github.com/izaakdale/service-delivery/dao"
 	factory "github.com/izaakdale/service-delivery/factory_faker"
@@ -15,9 +14,7 @@ import (
 	"google.golang.org/grpc/reflection"
 )
 
-var wg sync.WaitGroup
-
-type Server struct {
+type GrpcServer struct {
 	delivery.DeliveryServiceServer
 }
 
@@ -25,10 +22,10 @@ func RunGrpcServer() {
 
 	dao.Init("ordering-app", "eu-west-2")
 	gs := grpc.NewServer()
-	delivery.RegisterDeliveryServiceServer(gs, &Server{})
+	delivery.RegisterDeliveryServiceServer(gs, &GrpcServer{})
 	reflection.Register(gs)
 
-	var addr = "localhost:8081"
+	var addr = "localhost:50001"
 	lis, err := net.Listen("tcp", addr)
 	if err != nil {
 		log.Fatalf("Failed to listen on %v\n", err)
@@ -37,7 +34,7 @@ func RunGrpcServer() {
 	log.Fatal(gs.Serve(lis))
 }
 
-func (s *Server) Delivery(ctx context.Context, in *delivery.DeliveryRequest) (*delivery.DeliveryResponse, error) {
+func (s *GrpcServer) Delivery(ctx context.Context, in *delivery.DeliveryRequest) (*delivery.DeliveryResponse, error) {
 
 	logger.Info("Order ID: " + in.OrderId)
 
@@ -48,11 +45,9 @@ func (s *Server) Delivery(ctx context.Context, in *delivery.DeliveryRequest) (*d
 		Address:    in.Address,
 	})
 
-	// wg.Add(1)
 	go factory.UpdateStatuses(in)
-	// wg.Wait()
 
 	return &delivery.DeliveryResponse{
-		Status: delivery.ORDER_STATUS_PROCESSING,
+		Status: delivery.ORDER_STATUS_name[int32(delivery.ORDER_STATUS_PROCESSING)],
 	}, nil
 }
