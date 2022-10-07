@@ -42,9 +42,10 @@ func (s *Server) Delivery(ctx context.Context, in *delivery.DeliveryRequest) (*d
 	logger.Info("Order ID: " + in.OrderId)
 
 	dao.UpdateStatus(&dao.DeliveryRecord{
-		OrderId:        "ORDER#" + in.OrderId,
-		DeliveryStatus: delivery.ORDER_STATUS_name[int32(delivery.ORDER_STATUS_PROCESSING)],
-		Address:        in.Address,
+		OrderId:    dao.QuotePrefixPK + in.OrderId,
+		RecordType: dao.StatusSK,
+		Status:     delivery.ORDER_STATUS_name[int32(delivery.ORDER_STATUS_PROCESSING)],
+		Address:    in.Address,
 	})
 
 	// wg.Add(1)
