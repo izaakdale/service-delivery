@@ -20,12 +20,117 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type ORDER_STATUS int32
+
+const (
+	ORDER_STATUS_PROCESSING       ORDER_STATUS = 0
+	ORDER_STATUS_OUT_FOR_DELIVERY ORDER_STATUS = 1
+	ORDER_STATUS_DELIVERED        ORDER_STATUS = 2
+)
+
+// Enum value maps for ORDER_STATUS.
+var (
+	ORDER_STATUS_name = map[int32]string{
+		0: "PROCESSING",
+		1: "OUT_FOR_DELIVERY",
+		2: "DELIVERED",
+	}
+	ORDER_STATUS_value = map[string]int32{
+		"PROCESSING":       0,
+		"OUT_FOR_DELIVERY": 1,
+		"DELIVERED":        2,
+	}
+)
+
+func (x ORDER_STATUS) Enum() *ORDER_STATUS {
+	p := new(ORDER_STATUS)
+	*p = x
+	return p
+}
+
+func (x ORDER_STATUS) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ORDER_STATUS) Descriptor() protoreflect.EnumDescriptor {
+	return file_model_delivery_delivery_proto_enumTypes[0].Descriptor()
+}
+
+func (ORDER_STATUS) Type() protoreflect.EnumType {
+	return &file_model_delivery_delivery_proto_enumTypes[0]
+}
+
+func (x ORDER_STATUS) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ORDER_STATUS.Descriptor instead.
+func (ORDER_STATUS) EnumDescriptor() ([]byte, []int) {
+	return file_model_delivery_delivery_proto_rawDescGZIP(), []int{0}
+}
+
+type DeliveryRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	OrderId string   `protobuf:"bytes,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	Address *Address `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
+}
+
+func (x *DeliveryRequest) Reset() {
+	*x = DeliveryRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_model_delivery_delivery_proto_msgTypes[0]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeliveryRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeliveryRequest) ProtoMessage() {}
+
+func (x *DeliveryRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_model_delivery_delivery_proto_msgTypes[0]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeliveryRequest.ProtoReflect.Descriptor instead.
+func (*DeliveryRequest) Descriptor() ([]byte, []int) {
+	return file_model_delivery_delivery_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *DeliveryRequest) GetOrderId() string {
+	if x != nil {
+		return x.OrderId
+	}
+	return ""
+}
+
+func (x *DeliveryRequest) GetAddress() *Address {
+	if x != nil {
+		return x.Address
+	}
+	return nil
+}
+
 type Address struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	HouseNameOrNumber string `protobuf:"bytes,2,opt,name=house_name_or_number,json=houseNameOrNumber,proto3" json:"house_name_or_number,omitempty"`
+	HouseNameOrNumber string `protobuf:"bytes,1,opt,name=house_name_or_number,json=houseNameOrNumber,proto3" json:"house_name_or_number,omitempty"`
+	Street            string `protobuf:"bytes,2,opt,name=street,proto3" json:"street,omitempty"`
 	Town              string `protobuf:"bytes,3,opt,name=town,proto3" json:"town,omitempty"`
 	Postcode          string `protobuf:"bytes,4,opt,name=postcode,proto3" json:"postcode,omitempty"`
 }
@@ -33,7 +138,7 @@ type Address struct {
 func (x *Address) Reset() {
 	*x = Address{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_model_delivery_delivery_proto_msgTypes[0]
+		mi := &file_model_delivery_delivery_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -46,7 +151,7 @@ func (x *Address) String() string {
 func (*Address) ProtoMessage() {}
 
 func (x *Address) ProtoReflect() protoreflect.Message {
-	mi := &file_model_delivery_delivery_proto_msgTypes[0]
+	mi := &file_model_delivery_delivery_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -59,12 +164,19 @@ func (x *Address) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Address.ProtoReflect.Descriptor instead.
 func (*Address) Descriptor() ([]byte, []int) {
-	return file_model_delivery_delivery_proto_rawDescGZIP(), []int{0}
+	return file_model_delivery_delivery_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *Address) GetHouseNameOrNumber() string {
 	if x != nil {
 		return x.HouseNameOrNumber
+	}
+	return ""
+}
+
+func (x *Address) GetStreet() string {
+	if x != nil {
+		return x.Street
 	}
 	return ""
 }
@@ -88,16 +200,27 @@ var File_model_delivery_delivery_proto protoreflect.FileDescriptor
 var file_model_delivery_delivery_proto_rawDesc = []byte{
 	0x0a, 0x1d, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x2f, 0x64, 0x65, 0x6c, 0x69, 0x76, 0x65, 0x72, 0x79,
 	0x2f, 0x64, 0x65, 0x6c, 0x69, 0x76, 0x65, 0x72, 0x79, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12,
-	0x08, 0x64, 0x65, 0x6c, 0x69, 0x76, 0x65, 0x72, 0x79, 0x22, 0x6a, 0x0a, 0x07, 0x41, 0x64, 0x64,
-	0x72, 0x65, 0x73, 0x73, 0x12, 0x2f, 0x0a, 0x14, 0x68, 0x6f, 0x75, 0x73, 0x65, 0x5f, 0x6e, 0x61,
-	0x6d, 0x65, 0x5f, 0x6f, 0x72, 0x5f, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x11, 0x68, 0x6f, 0x75, 0x73, 0x65, 0x4e, 0x61, 0x6d, 0x65, 0x4f, 0x72, 0x4e,
-	0x75, 0x6d, 0x62, 0x65, 0x72, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x6f, 0x77, 0x6e, 0x18, 0x03, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x04, 0x74, 0x6f, 0x77, 0x6e, 0x12, 0x1a, 0x0a, 0x08, 0x70, 0x6f, 0x73,
-	0x74, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x70, 0x6f, 0x73,
-	0x74, 0x63, 0x6f, 0x64, 0x65, 0x42, 0x12, 0x5a, 0x10, 0x2e, 0x2f, 0x6d, 0x6f, 0x64, 0x65, 0x6c,
-	0x2f, 0x64, 0x65, 0x6c, 0x69, 0x76, 0x65, 0x72, 0x79, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x33,
+	0x08, 0x64, 0x65, 0x6c, 0x69, 0x76, 0x65, 0x72, 0x79, 0x22, 0x59, 0x0a, 0x0f, 0x44, 0x65, 0x6c,
+	0x69, 0x76, 0x65, 0x72, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x19, 0x0a, 0x08,
+	0x6f, 0x72, 0x64, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07,
+	0x6f, 0x72, 0x64, 0x65, 0x72, 0x49, 0x64, 0x12, 0x2b, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65,
+	0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x11, 0x2e, 0x64, 0x65, 0x6c, 0x69, 0x76,
+	0x65, 0x72, 0x79, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x52, 0x07, 0x61, 0x64, 0x64,
+	0x72, 0x65, 0x73, 0x73, 0x22, 0x82, 0x01, 0x0a, 0x07, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
+	0x12, 0x2f, 0x0a, 0x14, 0x68, 0x6f, 0x75, 0x73, 0x65, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x5f, 0x6f,
+	0x72, 0x5f, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x11,
+	0x68, 0x6f, 0x75, 0x73, 0x65, 0x4e, 0x61, 0x6d, 0x65, 0x4f, 0x72, 0x4e, 0x75, 0x6d, 0x62, 0x65,
+	0x72, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x72, 0x65, 0x65, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x06, 0x73, 0x74, 0x72, 0x65, 0x65, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x6f, 0x77,
+	0x6e, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x74, 0x6f, 0x77, 0x6e, 0x12, 0x1a, 0x0a,
+	0x08, 0x70, 0x6f, 0x73, 0x74, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x08, 0x70, 0x6f, 0x73, 0x74, 0x63, 0x6f, 0x64, 0x65, 0x2a, 0x43, 0x0a, 0x0c, 0x4f, 0x52, 0x44,
+	0x45, 0x52, 0x5f, 0x53, 0x54, 0x41, 0x54, 0x55, 0x53, 0x12, 0x0e, 0x0a, 0x0a, 0x50, 0x52, 0x4f,
+	0x43, 0x45, 0x53, 0x53, 0x49, 0x4e, 0x47, 0x10, 0x00, 0x12, 0x14, 0x0a, 0x10, 0x4f, 0x55, 0x54,
+	0x5f, 0x46, 0x4f, 0x52, 0x5f, 0x44, 0x45, 0x4c, 0x49, 0x56, 0x45, 0x52, 0x59, 0x10, 0x01, 0x12,
+	0x0d, 0x0a, 0x09, 0x44, 0x45, 0x4c, 0x49, 0x56, 0x45, 0x52, 0x45, 0x44, 0x10, 0x02, 0x42, 0x12,
+	0x5a, 0x10, 0x2e, 0x2f, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x2f, 0x64, 0x65, 0x6c, 0x69, 0x76, 0x65,
+	0x72, 0x79, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -112,16 +235,20 @@ func file_model_delivery_delivery_proto_rawDescGZIP() []byte {
 	return file_model_delivery_delivery_proto_rawDescData
 }
 
-var file_model_delivery_delivery_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_model_delivery_delivery_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_model_delivery_delivery_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_model_delivery_delivery_proto_goTypes = []interface{}{
-	(*Address)(nil), // 0: delivery.Address
+	(ORDER_STATUS)(0),       // 0: delivery.ORDER_STATUS
+	(*DeliveryRequest)(nil), // 1: delivery.DeliveryRequest
+	(*Address)(nil),         // 2: delivery.Address
 }
 var file_model_delivery_delivery_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	2, // 0: delivery.DeliveryRequest.address:type_name -> delivery.Address
+	1, // [1:1] is the sub-list for method output_type
+	1, // [1:1] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_model_delivery_delivery_proto_init() }
@@ -131,6 +258,18 @@ func file_model_delivery_delivery_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_model_delivery_delivery_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeliveryRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_model_delivery_delivery_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Address); i {
 			case 0:
 				return &v.state
@@ -148,13 +287,14 @@ func file_model_delivery_delivery_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_model_delivery_delivery_proto_rawDesc,
-			NumEnums:      0,
-			NumMessages:   1,
+			NumEnums:      1,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_model_delivery_delivery_proto_goTypes,
 		DependencyIndexes: file_model_delivery_delivery_proto_depIdxs,
+		EnumInfos:         file_model_delivery_delivery_proto_enumTypes,
 		MessageInfos:      file_model_delivery_delivery_proto_msgTypes,
 	}.Build()
 	File_model_delivery_delivery_proto = out.File
