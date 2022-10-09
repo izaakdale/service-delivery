@@ -1,6 +1,7 @@
 package dao
 
 const (
-	QuotePrefixPK = "ORDER#"
+	OrderPrefixPK = "ORDER#"
+	ItemSK        = "ITEMS"
 	StatusSK      = "STATUS"
 )

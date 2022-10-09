@@ -25,7 +25,7 @@ func UpdateDeliveryStatusHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	dao.UpdateStatus(&dao.DeliveryRecord{
-		OrderId:    dao.QuotePrefixPK + req.OrderId,
+		OrderId:    dao.OrderPrefixPK + req.OrderId,
 		RecordType: dao.StatusSK,
 		Status:     status,
 		Address:    req.Address,
