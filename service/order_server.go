@@ -7,7 +7,6 @@ import (
 	"net"
 
 	"github.com/izaakdale/service-delivery/dao"
-	factory "github.com/izaakdale/service-delivery/factory_faker"
 	"github.com/izaakdale/service-delivery/model/delivery"
 	"github.com/izaakdale/utils-go/logger"
 	"google.golang.org/grpc"
@@ -45,7 +44,8 @@ func (s *GrpcServer) Delivery(ctx context.Context, in *delivery.DeliveryRequest)
 		Address:    in.Address,
 	})
 
-	go factory.UpdateStatuses(in)
+	// factory is a fake...
+	// go factory.UpdateStatuses(in)
 
 	return &delivery.DeliveryResponse{
 		Status: delivery.ORDER_STATUS_name[int32(delivery.ORDER_STATUS_PROCESSING)],
