@@ -23,6 +23,6 @@ func NewService() *Service {
 
 func Routes() *httprouter.Router {
 	router := httprouter.New()
-	router.HandlerFunc("POST", "/update-delivery-status", UpdateDeliveryStatusHandler)
+	router.HandlerFunc("POST", "/status", UpdateDeliveryStatusHandler)
 	return router
 }
