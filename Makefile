@@ -1,5 +1,8 @@
 PROTO_DIR=model/delivery
 
+run:
+	SERVICE_ADDRESS=8081 SERVICE_DYNAMOTABLENAME=ordering-app SERVICE_DYNAMOREGION=eu-west-2 SERVICE_GRPCADDRESS=localhost:50001 go run main.go
+
 server:
 	go build -o bin/blog/server ./blog/server
 client:

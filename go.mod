@@ -6,6 +6,7 @@ require (
 	github.com/aws/aws-sdk-go v1.44.113
 	github.com/izaakdale/utils-go v1.0.6-0.20221007143240-2ccea1723a57
 	github.com/julienschmidt/httprouter v1.3.0
+	github.com/kelseyhightower/envconfig v1.4.0
 	google.golang.org/grpc v1.50.0
 	google.golang.org/protobuf v1.28.1
 )

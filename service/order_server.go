@@ -17,14 +17,11 @@ type GrpcServer struct {
 	delivery.DeliveryServiceServer
 }
 
-func RunGrpcServer() {
-
-	dao.Init("ordering-app", "eu-west-2")
+func RunGrpcServer(addr string) {
 	gs := grpc.NewServer()
 	delivery.RegisterDeliveryServiceServer(gs, &GrpcServer{})
 	reflection.Register(gs)
 
-	var addr = "localhost:50001"
 	lis, err := net.Listen("tcp", addr)
 	if err != nil {
 		log.Fatalf("Failed to listen on %v\n", err)
