@@ -1,0 +1,58 @@
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: delivery
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: delivery
+  template:
+    metadata:
+      labels:
+        app: delivery
+    spec:
+      serviceAccountName: aws-dynamo
+      containers:
+      - name: delivery
+        image: izaakdale/service-delivery
+        env: 
+        - name: SERVICE_ADDRESS
+          value: "80"
+        - name: SERVICE_DYNAMOTABLENAME
+          value: "ordering-app"
+        - name: SERVICE_DYNAMOREGION
+          value: "eu-west-2"
+        - name: SERVICE_GRPCADDRESS
+          value: ":50001"
+        ports:
+        - name: web
+          containerPort: 80
+        - name: grpc
+          containerPort: 50001
+        resources:
+          requests:
+            memory: 256Mi
+            cpu: 250m
+          limits:
+            memory: 256Mi
+            cpu: 250m
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: role
+                operator: In
+                values:
+                - general
+      tolerations:
+      - operator: Exists
+        effect: NoSchedule
+      # tolerations:
+      # - key: team
+      #   operator: Equal
+      #   value: devops
+      #   effect: NoSchedule

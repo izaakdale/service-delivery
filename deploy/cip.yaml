@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name:  delivery
+spec:
+  selector:
+    app:  delivery
+  type: ClusterIP
+  ports:
+  - name:  grpc
+    port:  50001
+    targetPort:  50001
