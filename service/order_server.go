@@ -34,10 +34,15 @@ func (s *GrpcServer) Delivery(ctx context.Context, in *delivery.DeliveryRequest)
 
 	logger.Info("Order ID: " + in.OrderId)
 
-	dao.UpdateStatus(&dao.DeliveryRecord{
+	dao.UpdateStatus(&dao.StatusRecord{
 		OrderId:    dao.OrderPrefixPK + in.OrderId,
 		RecordType: dao.StatusSK,
 		Status:     delivery.ORDER_STATUS_name[int32(delivery.ORDER_STATUS_PROCESSING)],
+	})
+
+	dao.StoreAddress(&dao.AddressRecord{
+		OrderId:    dao.OrderPrefixPK + in.OrderId,
+		RecordType: dao.AddressSK,
 		Address:    in.Address,
 	})
 

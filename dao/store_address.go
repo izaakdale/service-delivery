@@ -7,8 +7,8 @@ import (
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
 )
 
-func UpdateStatus(s *StatusRecord) error {
-	statusMap, err := dynamodbattribute.MarshalMap(s)
+func StoreAddress(a *AddressRecord) error {
+	statusMap, err := dynamodbattribute.MarshalMap(a)
 	if err != nil {
 		return err
 	}

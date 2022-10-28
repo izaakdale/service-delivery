@@ -24,11 +24,10 @@ func UpdateDeliveryStatusHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	dao.UpdateStatus(&dao.DeliveryRecord{
+	dao.UpdateStatus(&dao.StatusRecord{
 		OrderId:    dao.OrderPrefixPK + req.OrderId,
 		RecordType: dao.StatusSK,
 		Status:     status,
-		Address:    req.Address,
 	})
 
 	response.WriteJson(w, http.StatusAccepted, response.Response{

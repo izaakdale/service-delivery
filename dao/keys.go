@@ -4,4 +4,5 @@ const (
 	OrderPrefixPK = "ORDER#"
 	ItemSK        = "ITEMS"
 	StatusSK      = "STATUS"
+	AddressSK     = "ADDRESS"
 )
