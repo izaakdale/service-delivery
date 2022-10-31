@@ -11,13 +11,14 @@ spec:
       app: delivery
   template:
     metadata:
+      namespace: order
       labels:
         app: delivery
     spec:
       serviceAccountName: aws-dynamo
       containers:
       - name: delivery
-        image: izaakdale/service-delivery
+        image: 735542962543.dkr.ecr.eu-west-2.amazonaws.com/service-delivery:4a743df38eed9f34b1babd352548b421bc42adf3
         env: 
         - name: SERVICE_ADDRESS
           value: "80"
